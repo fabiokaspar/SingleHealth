@@ -13,14 +13,14 @@ Nome do sistema
 
 Descrição breve
 
-O SingleHealth deve unificar o sistema de saúde brasileiro (hospitais particulares e públicos, clínicas médicas, PS, UBS, AMA...) com intuito de armazenar dados de consultas/exames médicos e laboratoriais dos pacientes. O sistema oferecerá suporte a várias bandeiras de hospitais, as quais possuem várias unidades geograficamente espalhadas pelo território nacional. O sistema indicará aos pacientes as especializações médicas em cada uma das unidades, além das eventuais informações de interesse público. 
-Além disso, o sistema oferecerá suporte a dados de farmácias hospitalares, para auxiliar farmacêuticos hospitalares e outros profissionais na busca, inclusão, remoção, atualização de fármacos disponíveis na unidade.
-
-
+O SingleHealth deve unificar o sistema de saúde brasileiro (hospitais particulares e públicos, clínicas médicas, PS, UBS, AMA...) com intuito de armazenar dados de 
+consultas/exames médicos e laboratoriais dos pacientes. O sistema oferecerá suporte a várias bandeiras de hospitais, as quais possuem várias unidades 
+geograficamente espalhadas pelo território nacional. O sistema indicará aos pacientes as especializações médicas em cada uma das unidades, além das eventuais 
+informações de interesse público. 
+Além disso, o sistema oferecerá suporte a dados de farmácias hospitalares, para auxiliar farmacêuticos hospitalares e outros profissionais na busca, inclusão, 
+remoção, atualização de fármacos disponíveis na unidade.
 
 Além disso, o sistema pode eventualmente armazenar dados sobre:
 
 - as unidades cadastradas (localização, especializações médicas, tipos de exame oferecidos, qualidade médico-hospitalar, preços, horários de atendimento, ...)
 - pacientes das unidades de hospitais cadastrados (resultados e histórico de exames, consultas marcadas, medicação usada, estatísticas dos dados da saúde dos pacientes, ...)
-
-
