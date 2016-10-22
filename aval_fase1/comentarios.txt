@@ -1,0 +1,26 @@
+Fábio Eduardo Kaspar - NUSP: 7991166
+Nome do sistema: SingleHealth
+
+>>> Comentários o documento de análise de requisitos:
+
++ O documento descreve apropriadamente os requisitos de dados do domínio escolhido como tema para o trabalho.
+
+>>> Comentários sobre o modelo EER:
+
++ De forma geral, o esquema conceitual apresentado está correto e bem feito. Os principais requisitos de dados reportados no documento entregue foram cobertos no esquema. 
++ A notação do modelo EER foi usada corretamente; restrições de chave, cardinalidade e participação foram incluídas no diagrama.
+
+- Há algumas cardinalidades e restrições de participação incorretas (veja os comentários feitos sobre o pdf do diagrama).
+- Na compras de medicamentos, não se registra de qual enfermaria os medicamentos foram retirados. Acho que é importante ter essa informação no BD.
+- Seria interessante ter associado a cada paciente uma lista das doenças diagnosticadas para ele. Isso poderia ser mais um tipo de dado gerado nas consultas médicas. Existe uma tabela de código internacional de doenças (https://pt.wikipedia.org/wiki/Lista_de_c%C3%B3digos_da_CID-10) que poderia ser usada para isso. É importante para o Ministério da Saúde poder saber quantos pacientes têm ou já tiveram uma determinada doença (por exemplo, a Dengue).
+- O BD não guarda informações sobre internações, cirurgias e outros procedimentos médicos que os pacientes podem sofrer e que deveriam aparecer em seus prontuários. Inclusive, o documento de requisitos lista como primeiro exemplo de consulta para o BD o seguinte: "pacientes internados em estado grave na unidade X". Mas não me parece que o seu BD apoiará de forma apropriada esse tipo de consulta.
+
+  Como o seu BD já está grande, você pode apenas mencionar no documento de requisitos que essa é uma parte importante do prontuário eletrônico, mas que você optou por deixá-la de fora deste projeto, por conta das restrições de tempo para o desenvolvimento do trabalho.
+
+
+>>> Sobre a proposta para uso do BD NoSQL:
+- Não entendi direito quais serão as coleções de dados que você criará no MongoDB. Entendi que haverá uma coleção de pacientes (onde cada paciente é um agregado que conterá todos dos dados dos exames realizados por ele). Mas não entendi como os demais dados do diagrama ficarão separados em coleções.
+- É preciso elaborar melhor a parte sobre resultados de exames; você poderia separá-los em imagens médicas,
+laudos textuais, sinais eletrofisiológicos (como eletrocardiogramas e eletroencefalografias), etc.
+  Também é importate ter informações sobre o local (laboratório, unidade de saúde, etc.) onde cada exame foi feito, o médico responsável pelo exame, o médico que pediu o exame, etc.
+  Aém disso, seria interessante pensar em algum tipo de consulta que você consegue fazer mais facilmente no mongoDB do que no PostgreSQL, como, por exemplo, buscas textuais e buscas em dados georeferenciados.
