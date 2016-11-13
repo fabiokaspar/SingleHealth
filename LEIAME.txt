@@ -1,0 +1,94 @@
+					Sistema Operacional utilizado
+	
+* Windows 8, 64 bits
+
+
+					Banco Relacional no Rails
+
+Logo a seguir, segue o meu "workflow" de como utilizar o
+BD relacional no Rails. Como mandei a pasta da aplicação Rails
+em anexo, não é necessário seguir todos os passos, 
+com exceção da criação e configuração do banco de dados físico, 
+onde exige a importação do script SQL em anexo e 
+e isso deve ser feito manualmente.
+
+Criei o projeto:
+
+> rails new projSH -d postgresql
+
+- editei config/database.yml conforme os dados do meu bd.
+(aqui é necessário configurar informações específicas do BD instalado
+em sua máquina)
+
+Criação e configuração do BD relacional
+
+> psql -U postgres -p 5432
+	
+	postgres=# create database bd_sh;
+	postgres=# \q
+	
+> psql -U postgres -p 5432 -d bd_sh
+
+	bd_sh=# \i 'C:\\[caminho do modelo_fisico.sql]\';
+	bd_sh=# \dt;
+	bd_sh=# \q
+
+	
+Consultas usando Ruby on Rails
+
+- entre na pasta do projeto
+
+- criar arquivos .rb para cada uma das classes em app/models, e cada 
+classe estará associada a uma relação específica do BD.
+No meu caso, já as criei nesta pasta, não se preocupe com isso. 
+
+- Para fazer a migration do banco para a aplicação, rode:
+	> rake db:migrate
+
+- Para carregar o esquema para o ambiente da aplicação, rode:
+	> rake db:schema:load
+
+- Finalmente, para rodar minhas consultas ao banco relacional, rode:
+	> rake db:seed
+
+					
+					Banco NoSQL MongoDB no Rails 
+
+Instalação e inicialização do servidor MongoDB
+
+
+- baixar o executável para a versão do Windows em uso e dar 2 cliques sobre ele para instalar o MongoDB
+
+- após a instalação, criar a pasta C:\data\db
+
+- entrar na pasta recém criada do MongoDB e, na pasta bin, rodar o servidor:
+	> mongod.exe
+	- certifique-se se o processo iniciado está aguardando conexões de clientes na porta 27017
+	- mantenha o servidor rodando
+
+	
+Instalando o driver do MongoDB no Rails
+
+
+- abra outro prompt, entre na pasta do projeto da aplicação rails
+
+- adicione ao final do arquivo Gemfile esta linha:
+	gem 'mongo', '~> 2.2'
+
+- para instalar o driver, rode no prompt:
+	> bundle install 
+
+	
+Consultas usando Ruby on Rails
+
+
+- criei um script chamado mongo.rb na pasta lib do projeto
+
+- adicionei no topo do script esta linha:
+	require 'mongo' 
+
+- Escrevi códigos em ruby que façam consultas ao BD do MongoDB
+
+- Para rodar meu script, rode:
+	> rails r lib\mongo.rb
+
