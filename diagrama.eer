@@ -95,7 +95,7 @@
     <nodes xmi:type="eer:Attribute" xmi:id="_DWX2oJnnEeaU_KXIAG_byw" name="cidade" AttributeLinkTarget="_FungYJnnEeaU_KXIAG_byw"/>
     <nodes xmi:type="eer:Attribute" xmi:id="_SFunAJnnEeaU_KXIAG_byw" name="dosagem" AttributeLinkTarget="_Uzd_oJnnEeaU_KXIAG_byw"/>
     <nodes xmi:type="eer:Attribute" xmi:id="_Vq26oJnnEeaU_KXIAG_byw" name="periodo" AttributeLinkTarget="_YyFxUJnnEeaU_KXIAG_byw"/>
-    <nodes xmi:type="eer:Attribute" xmi:id="_kKB58JnnEeaU_KXIAG_byw" name="cod_us_farmacia" AttributeLinkTarget="_nxJxoJnnEeaU_KXIAG_byw"/>
+    <nodes xmi:type="eer:Attribute" xmi:id="_kKB58JnnEeaU_KXIAG_byw" name="cod_us_farmacia" type="DERIVED" AttributeLinkTarget="_nxJxoJnnEeaU_KXIAG_byw"/>
     <nodes xmi:type="eer:Attribute" xmi:id="_pmoFgJnnEeaU_KXIAG_byw" name="cod_us_farmacia" type="DERIVED" AttributeLinkTarget="_rN5lUJnnEeaU_KXIAG_byw"/>
     <nodes xmi:type="eer:Relationship" xmi:id="_Gqak0JnoEeaU_KXIAG_byw" name="estoca" AttributeLinkSource="_LtMswJnpEeaU_KXIAG_byw _1W9GUKXXEeajeKX-bmZwTw" relationshipLink="_desN4JnoEeaU_KXIAG_byw _kfAO8JnoEeaU_KXIAG_byw"/>
     <nodes xmi:type="eer:Attribute" xmi:id="_6Ph8AJnoEeaU_KXIAG_byw" name="tarja" AttributeLinkTarget="_9J2YEJnoEeaU_KXIAG_byw"/>
