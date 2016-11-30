@@ -6,43 +6,31 @@
 	var fs = require('fs');
 	var formidable = require("formidable");
 	var util = require('util');
+	var express = require('express');
+	var app = express();
 
-	var conString = "postgres://postgres:felinonino@localhost/Computadores";
+	// definindo local de arquivos públicos
+	app.use(express.static(__dirname + '/public'));
 	
-	var client = new pg.Client(conString);
-
-	client.connect();
-	client.query('set search_path to mac439_aula10')
-    
-	var jsonTxt;
-	var json;
-	var query;
-	var fields;
-	var html;
-
-	//var query = showTable("impressora")
-	
-	/*query.on("row", function (row, result) {
-		result.addRow(row);
-		jsonTxt = JSON.stringify(result.rows, null, "  ")
-		json = result.rows
-	});
-	*/
-
-
+	/*	
 	var server = http.createServer(
 		function(req, res) {
 			if (req.method.toLowerCase() == 'get') {
 	    		displayForm(res);
 	    	} else if (req.method.toLowerCase() == 'post') {
-				//console.log(req)
 				processAllFieldsOfTheForm(req, res);
 			}
 		}
 	);
+	*/
 
+	app.get('/views/cadastro.html', function (req, res) {
+		displayForm(res)
+	});
+
+	
 	function displayForm(res) {
-    	fs.readFile('form.html', function (err, data) {
+    	fs.readFile('./views/cadastro.html', function (err, data) {
 	        res.writeHead(200, {
 	            'Content-Type': 'text/html',
 	            'Content-Length': data.length
@@ -50,67 +38,109 @@
 	        res.write(data);
 	        res.end();
     	});
+
 	}
 	
-	function processAllFieldsOfTheForm(req, res) {
+
+
+	function processAllFieldsOfTheForm (req, res) {
 	    var form = new formidable.IncomingForm();
 
 	    form.parse(req, function (err, fields, files) {
 	        //Store the data from the fields in your data store.
 	        //The data store could be a file or database or any other store based
 	        //on your application.
+	        
+	        //res.write('dados recebidos:\n\n');
 	        res.writeHead(200, {
-            	'content-type': 'text/plain'
-	        });
-	        
-	        res.write('dados recebidos:\n\n');
-	        
-	        res.end(util.inspect({
-	            fields: fields,
-	            files: files
-	        }));
-
-			//console.log(fields)
-			//var atrs = atributosTabela(fields)
+        		'content-type': 'text/html'
+        	});
 			
 			if (fields.botao == 'Insere') {
-				var register  = ["oi","x@x", "bla"];
+		        res.end(util.inspect({
+		            fields: fields,
+		            files: files
+		        }));
 
-				client.query('insert into teste values($1, $2, $3)', 
-					register);
+				console.log(fields)
+				var register  = [];
+
+				for (key in fields) {
+					if (key != 'botao')
+						register.push(fields[key])
+				}
+
+				var client = createConection();
+				var str = generateComandInsert(register, 'teste')
+				client.query(str, register);
 			}
 
 			else if (fields.botao == 'Busca') {
-				query = client.query('select * from teste');
-				console.log(teste)
-				
-				query.on("row", function (row, result) {
-					console.log("--- enter -----")
-					result.addRow(row);
-					jsonTxt = JSON.stringify(result.rows, null, "  ")
-					json = result.rows
-				});
-				
-				console.log(json)
-				fields = atributosTabela(json)
-				html = geraHTMLTabela(fields, json)
-				res.write(html);
+				var client = createConection();
+
+				executeQuery('select * from mac439_aula10.'+fields['table'], client, res)
 			}
 
 	    });
 	}
 
-	server.listen(3000);
-	console.log('Servidor iniciado em localhost:3000. Ctrl+C para encerrar…');
-
+	//server.listen(3000);
+	http.createServer(app).listen(3000);
+	console.log('Servidor node iniciado em localhost:3000\nCtrl+C para encerrar…');
 	
-	query.on("end", function (result) {
-		console.log("quero sair!")
-		client.end();
-	});
-
 
 /*===================== Funções ============================*/
+
+	function generateComandInsert(inputReg, inputTable) {
+		var str = 'insert into mac439_aula10.'+inputTable+' values(';
+			
+		for (var i = 1; i <= inputReg.length; i++) {
+			str += ('$'+i+', ');
+		}
+
+		str = str.substring(0, str.length-2)
+		str += ');'
+		
+		console.log(str)
+		
+		return str;
+	}
+
+	function createConection() {
+		var conString = "postgres://postgres:felinonino@localhost:5432/Computadores";
+		var myClient = new pg.Client(conString);
+
+		myClient.connect();
+
+		return myClient;
+	}
+	
+	function executeQuery (strQuery, client, res) {
+		//var query = myClient.query('select * from mac439_aula10.teste');
+        
+
+		var query = client.query(strQuery);
+		
+		query.on("row", function (row, result) {
+			//console.log("--- enter -----")
+			result.addRow(row);
+			//jsonTxt = JSON.stringify(result.rows, null, "  ")
+		});
+	
+
+		query.on("end", function (result) {
+			//myClient.end();
+			var jsons = result.rows
+
+			var fields = atributosTabela(jsons[0])
+			var html = geraHTMLTabela(fields, jsons)
+			
+			console.log(jsons)
+			res.write(html);
+			res.end()
+		});
+				
+	}
 
 	function showTable (nomeTabela) {
 		var query = client.query('select * from '+ nomeTabela);
