@@ -6,7 +6,11 @@
 * `sudo apt-get install nodejs`
 * `sudo apt-get install build-essential`
 * `npm install pg`
-
+* `npm init`
+* `npm install express --save` 
+ 
+ https://www.youtube.com/watch?v=tbgBN2y5_wI
+  
 ### Opcional:
 
 * `npm install -g nodemon`
