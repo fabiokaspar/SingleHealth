@@ -6,3 +6,7 @@
 * `sudo apt-get install nodejs`
 * `sudo apt-get install build-essential`
 * `npm install pg`
+
+### Opcional:
+
+* `npm install -g nodemon`
