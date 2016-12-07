@@ -10,7 +10,7 @@
 * `npm install express --save`  
  https://www.youtube.com/watch?v=tbgBN2y5_wI
 
-* `npm install jQuery`
+* `npm install jquery`
 
   
 ### Opcional:
