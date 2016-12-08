@@ -11,7 +11,9 @@
  https://www.youtube.com/watch?v=tbgBN2y5_wI
  
 * `npm install jquery`
-* `npm install -g mongodb`
+* Instalação e configuração do mongodb: 
+ http://blog.unifick.com.br/tutoriais/instalando-o-mongodb-no-ubuntu/
+* `npm install -g mongodb` (driver para o node)
 
   
 ### Opcional:
